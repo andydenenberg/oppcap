@@ -11,4 +11,8 @@ Oppcap::Application.routes.draw do
   resources :users, :only => [:show, :index] do
     get 'invite', :on => :member
   end
+  
+  get 'home/about' => 'home#about', :as => :about
+  get 'home/experience' => 'home#experience', :as => :experience
+  
 end

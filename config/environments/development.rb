@@ -10,25 +10,31 @@ Oppcap::Application.configure do
   config.whiny_nils = true
 
   # Show full error reports and disable caching
-  config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+#  config.consider_all_requests_local       = true
+#  config.action_controller.perform_caching = false
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
   # change to true to allow email to be sent during development
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"  
 
-    config.action_mailer.smtp_settings = {
-      :address   => "smtp.mandrillapp.com",
-      :port      => 25,
-      :user_name => ENV["MANDRILL_USERNAME"],
-      :password  => ENV["MANDRILL_API_KEY"]
+     mail_cred = YAML.load(File.read('../../../Desktop/config.yml'))   
+
+     config.action_mailer.smtp_settings = {
+
+    :user_name =>  mail_cred['user_name'],
+    :password => mail_cred['password'],
+
+    :domain => "ospreypointpartners.com",
+    :address => "smtp.sendgrid.net",
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+
     }
-
-
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
