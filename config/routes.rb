@@ -1,7 +1,7 @@
 Oppcap::Application.routes.draw do
-  authenticated :user do
+#  authenticated :user do
     root :to => 'home#index'
-  end
+#  end
   devise_scope :user do
     root :to => "devise/registrations#new"
     match '/user/confirmation' => 'confirmations#update', :via => :put, :as => :update_user_confirmation
